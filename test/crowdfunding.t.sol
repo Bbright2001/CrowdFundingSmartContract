@@ -30,8 +30,6 @@ contract testCrowdFunding is Test {
         assertEq(balance, 2 ether);
     }
     function testContributionsAndWithdraw() public {
-    vm.prank(creator);
-    funding = new CrowdFunding(2 ether, 10); // 10 days
 
     // Fund accounts
     vm.deal(contributor1, 5 ether);
@@ -44,10 +42,10 @@ contract testCrowdFunding is Test {
     vm.prank(contributor2);
     funding.contributeFunds{value: 3 ether}();
 
-    assertEq(funding.amountRaised(), 6 ether);
-    assertTrue(funding.goalReached());
+    assertEq(funding.getTotalAmountContributed(), 6 ether);
 
-    
+    vm.warp(block.timestamp + 11 days);
+
     uint balanceBefore = creator.balance;
     vm.prank(creator);
     funding.withdrawFunds();

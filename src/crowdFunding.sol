@@ -46,9 +46,14 @@ contract CrowdFunding {
             goalReached = true;
         }
     }
+    function getTotalAmountContributed() public view returns (uint256) {
+    return amountRaised;
+}
 
-    function withdrawFunds() external onlyCreator {
-        require(goalReached == true, "Goal not met");
+    // function goalReached() external 
+
+    function withdrawFunds() external onlyCreator afterDeadline(){
+        require(goalReached, "Goal not met");
         require(!creatorWithdrawn, "Funds already withdrawn");
 
         creatorWithdrawn = true;
