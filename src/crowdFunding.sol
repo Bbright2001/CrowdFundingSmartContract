@@ -71,6 +71,8 @@ contract CrowdFunding {
         payable(msg.sender).transfer(amountContributed);
     }
 
+    receive() external payable {}
+
     function getTotalAmountContributed(address contributor) external view onlyCreator returns(uint){
             return contributions[contributor];
     }

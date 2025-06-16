@@ -10,7 +10,8 @@ contract testCrowdFunding is Test {
     address contributor2;
     address creator;
 
-    receive() external payable {}
+    
+receive() external payable {}
 
     function setUp() public {
         contributor1 = address(0x1);
