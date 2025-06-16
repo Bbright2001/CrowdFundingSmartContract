@@ -10,6 +10,8 @@ contract testCrowdFunding is Test {
     address contributor2;
     address creator;
 
+    receive() external payable {}
+
     function setUp() public {
         contributor1 = address(0x1);
         contributor2 = address(0x2);
@@ -37,12 +39,12 @@ contract testCrowdFunding is Test {
 
     
     vm.prank(contributor1);
-    funding.contributeFunds{value: 3 ether}();
+    funding.contributeFunds{value: 1 ether}();
 
     vm.prank(contributor2);
-    funding.contributeFunds{value: 3 ether}();
+    funding.contributeFunds{value: 1 ether}();
 
-    assertEq(funding.getTotalAmountContributed(), 6 ether);
+    assertEq(funding.getTotalAmountContributed(), 2 ether);
 
     vm.warp(block.timestamp + 11 days);
 

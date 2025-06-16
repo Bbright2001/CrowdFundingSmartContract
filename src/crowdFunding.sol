@@ -52,10 +52,11 @@ contract CrowdFunding {
 
     // function goalReached() external 
 
-    function withdrawFunds() external onlyCreator afterDeadline(){
+    function withdrawFunds() external onlyCreator afterDeadline(){ 
         require(goalReached, "Goal not met");
         require(!creatorWithdrawn, "Funds already withdrawn");
-
+        require(amountRaised >= goal, "Goal not reached");
+        
         creatorWithdrawn = true;
         payable(projectCreator).transfer(address(this).balance);
     }
